@@ -23,7 +23,7 @@ VALUES
 
 SELECT * FROM funcionarios;
 
--- Questão 3 e 4 e: Consultas com filtro
+-- Questão 3 a 5 e: Consultas com filtro
 
 SELECT nome FROM funcionarios WHERE departamento = 'Vendas'; 
 
@@ -31,3 +31,39 @@ SELECT * FROM funcionarios where salario > 5000;
 
 SELECT DISTINCT departamento FROM funcionarios; 
 
+-- Questão 6: Altera salários da TI
+
+UPDATE funcionarios SET salario = 7500 WHERE departamento = 'TI'; 
+
+-- Questão 7: Deleta funcionarios que ganham menos de 4000
+
+DELETE FROM funcionarios WHERE salario < 4000;
+
+-- Questão 8: Selecione os nomes e salários dos funcionários
+-- do departamento de "Vendas" com salário >= 6000
+
+SELECT nome, salario FROM funcionarios where salario >= 6000;
+
+-- Questão 9: Criar tabela projetos
+
+PRAGMA foreign_keys = ON; -- Ativa o suporte a chave estrangeira no SQLite do VSCODE
+
+CREATE TABLE projetos (
+id_projeto INT PRIMARY KEY,
+nome_projeto VARCHAR(100),
+id_gerente INT, 
+FOREIGN KEY (id_gerente) REFERENCES funcionarios (id)
+);
+
+INSERT INTO projetos
+(id_projeto, nome_projeto, id_gerente)
+VALUES
+('1', 'netuno', '10'),
+('2', 'plutao', '11'),
+('3', 'saturno', '12');
+
+SELECT * FROM projetos WHERE id_gerente = 11;
+
+-- Questão 10: Remover a tabela funcinarios do DB
+
+DROP TABLE funcionarios;
